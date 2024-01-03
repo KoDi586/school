@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "check")
-public class Controller {
+public class TestController {
     @GetMapping
     public String check() {
         return "hello";
