@@ -42,8 +42,8 @@ public class StudentController {
         return service.removeStudent(id);
     }
 
-    @GetMapping(path = "/filterByAge/{age}")
-    public Collection<Student> filterByAge(@PathVariable int age) {
-        return service.filterByAge(age);
-    }
+//    @GetMapping(path = "/filterByAge/{age}")
+//    public Collection<Student> filterByAge(@PathVariable int age) {
+//        return service.filterByAge(age);
+//    }
 }

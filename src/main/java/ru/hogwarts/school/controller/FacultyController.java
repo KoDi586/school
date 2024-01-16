@@ -40,8 +40,8 @@ public class FacultyController {
         return service.removeFaculty(id);
     }
 
-    @GetMapping(path = "/filterByColor/{color}")
-    public Collection<Faculty> filterByColor(@PathVariable String color) {
-        return service.filterByColor(color);
-    }
+//    @GetMapping(path = "/filterByColor/{color}")
+//    public Collection<Faculty> filterByColor(@PathVariable String color) {
+//        return service.filterByColor(color);
+//    }
 }
