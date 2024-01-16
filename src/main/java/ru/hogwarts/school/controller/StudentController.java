@@ -10,11 +10,16 @@ import java.util.Collection;
 @RestController
 @RequestMapping(path = "/student")
 public class StudentController {
-    private StudentService service;
+    private final StudentService service;
 
     @Autowired
     public StudentController(StudentService service) {
         this.service = service;
+    }
+
+    @PostMapping(path = "/create")
+    public Student createStudent(Student student) {
+        return service.createStudent(student);
     }
 
     @GetMapping("{id}")
