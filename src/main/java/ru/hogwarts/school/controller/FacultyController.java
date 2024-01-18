@@ -51,7 +51,10 @@ public class FacultyController {
         return service.removeFaculty(id);
     }
 
-
+    @GetMapping(path = "/getStudentsByFacultyId")
+    public Collection<Student> getStudentsByFacultyId(Long id) {
+        return service.getStudentsByFacultyId(id);
+    }
 
     // не удалять потом пригодится
 //    @GetMapping(path = "/filterByColor/{color}")

@@ -3,6 +3,7 @@ package ru.hogwarts.school.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
@@ -56,6 +57,11 @@ public class StudentController {
         return service.removeStudent(id);
     }
 
+
+    @GetMapping(path = "/getFacultyByStudentId")
+    public Faculty getFacultyByStudentId(Long id) {
+        return service.getFacultyByStudentId(id);
+    }
 //    @GetMapping(path = "/filterByAge/{age}")
 //    public Collection<Student> filterByAge(@PathVariable int age) {
 //        return service.filterByAge(age);

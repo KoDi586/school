@@ -46,6 +46,10 @@ public class Student {
         this.age = age;
     }
 
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
     @Override
     public String toString() {
         return "Student{" +

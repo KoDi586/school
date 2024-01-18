@@ -65,6 +65,11 @@ public class FacultyService {
         return facultyRepository.findAll();
     }
 
+    public Collection<Student> getStudentsByFacultyId(Long id) {
+        Faculty faculty = facultyRepository.findFacultyById(id);
+        return faculty.getStudents();
+    }
+
 //    public Collection<Faculty> filterByColor(String color) {
 //        return facultyMap.values().stream()
 //                .filter(student -> Objects.equals(student.getColor(), color))

@@ -2,29 +2,25 @@ package ru.hogwarts.school.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repositories.FacultyRepository;
 import ru.hogwarts.school.repositories.StudentRepository;
-import ru.hogwarts.school.testRepository.TestRepository;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
-    private final TestRepository testRepository;
+//    private final FacultyRepository facultyRepository;
     private final StudentRepository studentRepository;
 
+
     @Autowired
-    public StudentService(TestRepository testRepository, StudentRepository studentRepository) {
-        this.testRepository = testRepository;
+    public StudentService(StudentRepository studentRepository) {
+//        this.facultyRepository = facultyRepository;
         this.studentRepository = studentRepository;
     }
 
-//    public Student createStudent(Student student) {
-//        return testRepository.save(student);
-//    }
 
 
     //CREATE
@@ -58,6 +54,10 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
+    public Faculty getFacultyByStudentId(Long id) {
+        Student student = studentRepository.findStudentById(id);
+        return student.getFaculty();
+    }
     //возможно пригодится и нужно потом будет переделать, не удалять!
 //    public Collection<Student> filterByAge(int age) {
 //        return studentMap.values().stream()

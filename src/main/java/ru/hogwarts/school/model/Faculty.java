@@ -51,6 +51,10 @@ public class Faculty {
         this.color = color;
     }
 
+    public Set<Student> getStudents() {
+        return students;
+    }
+
     @Override
     public String toString() {
         return "Faculty{" +
