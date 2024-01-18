@@ -1,14 +1,13 @@
 package ru.hogwarts.school.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositories.FacultyRepository;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -50,11 +49,20 @@ public class FacultyService {
         Faculty faculty = facultyRepository.findById(id).get();
         facultyRepository.delete(faculty);
         return faculty;
-//        if (facultyMap.containsKey(id)) {
-//            return facultyMap.remove(id);
-//        } else {
-//            throw new RuntimeException("this is bad id!");
-//        }
+    }
+
+    //метод для поиска по цвету либо по имени
+    public Collection<Faculty> findByNameOrColor(String name, String color) {
+        if (name != null & StringUtils.isNotBlank(name)) {
+            return facultyRepository.findFacultiesByNameIgnoreCase(name);
+        } else if (color != null & StringUtils.isNotBlank(color)) {
+            return facultyRepository.findFacultiesByColorIgnoreCase(color);
+        }
+        return new ArrayList<>();
+    }
+
+    public Collection<Faculty> getAll() {
+        return facultyRepository.findAll();
     }
 
 //    public Collection<Faculty> filterByColor(String color) {

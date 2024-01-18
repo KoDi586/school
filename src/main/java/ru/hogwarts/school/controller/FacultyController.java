@@ -25,6 +25,17 @@ public class FacultyController {
         return service.findFaculty(id);
     }
 
+    @GetMapping(path = "/findByNameOrColor")
+    public Collection<Faculty> findByNameOrColor(@RequestParam(required = false) String name,
+                                                 @RequestParam(required = false) String color) {
+        return service.findByNameOrColor(name, color);
+    }
+
+    @GetMapping(path = "/getAll")
+    public Collection<Faculty> getAllFaculties() {
+        return service.getAll();
+    }
+
     @PostMapping
     public Faculty PostFaculty(@RequestBody Faculty faculty) {
         return service.addFaculty(faculty);
@@ -40,6 +51,9 @@ public class FacultyController {
         return service.removeFaculty(id);
     }
 
+
+
+    // не удалять потом пригодится
 //    @GetMapping(path = "/filterByColor/{color}")
 //    public Collection<Faculty> filterByColor(@PathVariable String color) {
 //        return service.filterByColor(color);

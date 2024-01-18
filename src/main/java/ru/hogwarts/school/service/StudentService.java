@@ -13,8 +13,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
-//    private Map<Long, Student> studentMap = new HashMap<>();
-//    private Long incrementId = 0L;
     private final TestRepository testRepository;
     private final StudentRepository studentRepository;
 
@@ -24,32 +22,24 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public Student createStudent(Student student) {
-        return testRepository.save(student);
-    }
+//    public Student createStudent(Student student) {
+//        return testRepository.save(student);
+//    }
 
 
     //CREATE
     public Student addStudent(Student student) {
         return studentRepository.save(student);
-//        student.setId(++incrementId);
-//        return studentMap.put(incrementId, student);
     }
 
     //READ
     public Student findStudent(Long id) {
         return studentRepository.findById(id).get();
-//        if (studentMap.containsKey(id)) {
-//            return studentMap.get(id);
-//        } else {
-//            throw new RuntimeException("this is bad id!");
-//        }
     }
 
     //UPDATE
     public Student setStudent(Student student) {
         return studentRepository.save(student);
-//        return studentMap.put(student.getId(), student);
     }
 
     //DELETE
@@ -57,13 +47,18 @@ public class StudentService {
         Student student = studentRepository.findById(id).get();
         studentRepository.delete(student);
         return student;
-//        if (studentMap.containsKey(id)) {
-//            return studentMap.remove(id);
-//        } else {
-//            throw new RuntimeException("this is bad id!");
-//        }
     }
 
+    // метод для поиска студентов в промежутке по возрасту
+    public Collection<Student> findStudentsBetweenAge(Integer min, Integer max) {
+        return studentRepository.findByAgeBetween(min, max);
+    }
+
+    public Collection<Student> getAll() {
+        return studentRepository.findAll();
+    }
+
+    //возможно пригодится и нужно потом будет переделать, не удалять!
 //    public Collection<Student> filterByAge(int age) {
 //        return studentMap.values().stream()
 //                .filter(student -> student.getAge() == age)

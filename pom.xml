@@ -51,6 +51,13 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.5.1</version>
 		</dependency>	<!--	зависимость для работы с бд postgresql-->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+<!--		для аннотации на проверку на null и работа со строками-->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.14.0</version>
+		</dependency>
 
 	</dependencies>
 
