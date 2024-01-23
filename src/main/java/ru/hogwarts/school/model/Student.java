@@ -4,16 +4,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "students")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private int age;
+
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     @JsonIgnore//обезательно иначе вложенность в друг друга будет
     private Faculty faculty;
+
+    @OneToOne
+    @JoinColumn(name = "avatar_id")
+    private Avatar avatar;
 
     public Student(Long id, String name, int age) {
         this.id = id;
@@ -26,6 +32,7 @@ public class Student {
 
     public Long getId() {
         return id;
+
     }
 
     public void setId(Long id) {

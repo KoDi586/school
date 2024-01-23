@@ -1,6 +1,7 @@
 package ru.hogwarts.school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
@@ -62,6 +63,8 @@ public class StudentController {
     public Faculty getFacultyByStudentId(Long id) {
         return service.getFacultyByStudentId(id);
     }
+
+
 //    @GetMapping(path = "/filterByAge/{age}")
 //    public Collection<Student> filterByAge(@PathVariable int age) {
 //        return service.filterByAge(age);
