@@ -12,11 +12,17 @@ where s.age < 21
 select s.age, s.name from student as s 
 order by age
 
-UPDATE student
-SET faculty_id = 3
-WHERE student.id = 7;
+UPDATE students
+SET avatar_id = 3
+WHERE students.id = 3;
 
 UPDATE faculty
 SET id = 4
 WHERE faculty."id" = 54;
+
+update avatars
+set id = 4
+where avatars.id = 352
+
+select a.id from avatars as a
 

@@ -2,6 +2,8 @@ package ru.hogwarts.school.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.exceptions.NotSaveAvatarEx;
@@ -72,7 +74,9 @@ public class AvatarService {
         student.setAvatar(newAvatar);
         //добавить студенту его аву
         avatarRepository.save(newAvatar);
-
+//        Avatar createfulAvatar = avatarRepository.findAvatarByFilePath(newAvatar.getFilePath());
+//        avatarRepository.changeIdByLostId(studentId.toString(), createfulAvatar.getId().toString());
+        //хочу потом сделать чтобы нормальные id были у авы студентов
     }
 
     private String getExtensions(String fileName) {
