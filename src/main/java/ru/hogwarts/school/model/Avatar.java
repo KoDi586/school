@@ -10,7 +10,7 @@ import lombok.Setter;
 @Table(name = "avatars")
 public class Avatar {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String filePath;
     private long fileSize;

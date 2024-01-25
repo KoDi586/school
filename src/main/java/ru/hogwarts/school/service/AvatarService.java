@@ -37,7 +37,7 @@ public class AvatarService {
 
         Path filePath = null;
         try {
-            filePath = Path.of(avatarsDir, student + "." + getExtensions(avatar.getOriginalFilename()));
+            filePath = Path.of(avatarsDir, student.toString() + "." + getExtensions(avatar.getOriginalFilename()));
         } catch (Exception e) {
             throw new NotSaveAvatarEx("ошибка сохранения фотографии в БД");
         }
@@ -60,18 +60,26 @@ public class AvatarService {
         //так можно сделать потому что у студента и его авы один и тот же id
 
         if (newAvatar == null) {
-            newAvatar = new Avatar(studentId);
+            newAvatar = new Avatar();
         }
+        newAvatar.setId(studentId);
         newAvatar.setData(avatar.getBytes());
         newAvatar.setFilePath(filePath.toString());
         newAvatar.setStudent(student);
         newAvatar.setMediaType(avatar.getContentType());
         newAvatar.setFileSize(avatar.getSize());
+
+        student.setAvatar(newAvatar);
+        //добавить студенту его аву
         avatarRepository.save(newAvatar);
 
     }
 
     private String getExtensions(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
+    }
+
+    public Avatar findAvatar(Long id) {
+        return avatarRepository.findAvatarById(id);
     }
 }
