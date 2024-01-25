@@ -1,5 +1,6 @@
 package ru.hogwarts.school.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +19,7 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 //import static io.swagger.v3.core.util.AnnotationsUtils.getExtensions;
 
 @Service
+@Transactional
 public class AvatarService {
     private final AvatarRepository avatarRepository;
     private final StudentService studentService;
