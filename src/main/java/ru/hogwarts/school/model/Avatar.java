@@ -74,4 +74,5 @@ public class Avatar {
     public Avatar(Long id) {
         this.id = id;
     }
+
 }

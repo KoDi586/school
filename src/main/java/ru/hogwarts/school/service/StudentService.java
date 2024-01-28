@@ -2,6 +2,7 @@ package ru.hogwarts.school.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.hogwarts.school.model.Avatar;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositories.FacultyRepository;
@@ -25,7 +26,24 @@ public class StudentService {
 
     //CREATE
     public Student addStudent(Student student) {
-        return studentRepository.save(student);
+
+        studentRepository.save(student);
+        Student createfulStudent = studentRepository.findStudentByNameAndAge(student.getName(), student.getAge());
+
+        if (createfulStudent == null) {
+            throw new RuntimeException("ошибка при поиске");
+        }
+        System.out.println("first point");
+
+        String needId = student.getId().toString();
+        String nowId = createfulStudent.getId().toString();
+
+        if (needId == null || nowId == null || needId == nowId) {
+            throw new RuntimeException("ошибка при поиске индексов");
+        }
+        System.out.println("second point");
+        studentRepository.changeIdByLostId(needId, nowId);
+        return student;
     }
 
     //READ

@@ -74,8 +74,12 @@ public class AvatarService {
         student.setAvatar(newAvatar);
         //добавить студенту его аву
         avatarRepository.save(newAvatar);
-//        Avatar createfulAvatar = avatarRepository.findAvatarByFilePath(newAvatar.getFilePath());
-//        avatarRepository.changeIdByLostId(studentId.toString(), createfulAvatar.getId().toString());
+        Avatar createfulAvatar = avatarRepository.findAvatarByFilePath(newAvatar.getFilePath());
+
+
+        avatarRepository.changeIdByLostId(studentId.toString(), createfulAvatar.getId().toString());
+
+
         //хочу потом сделать чтобы нормальные id были у авы студентов
     }
 

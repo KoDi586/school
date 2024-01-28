@@ -10,8 +10,8 @@ public interface AvatarRepository extends JpaRepository<Avatar, Long> {
 
     Avatar findAvatarByFilePath(String filePath);
 
-//    @Modifying
-//    @Query("update avatars set avatars.id = :needId where avatars.id = :nowId")
-//    void changeIdByLostId(String needId, String nowId);
+    @Modifying
+    @Query("UPDATE Avatar a SET a.id = :needId WHERE a.id = :nowId")
+    void changeIdByLostId(String needId, String nowId);
 
 }

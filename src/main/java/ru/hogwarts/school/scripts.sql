@@ -26,3 +26,7 @@ where avatars.id = 352
 
 select a.id from avatars as a
 
+update students
+set age = 100
+where students.name = 'aleks' and students.age = 83;
+
