@@ -1,5 +1,6 @@
 package ru.hogwarts.school.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Avatar;
@@ -11,6 +12,7 @@ import ru.hogwarts.school.repositories.StudentRepository;
 import java.util.Collection;
 
 @Service
+@Transactional
 public class StudentService {
 //    private final FacultyRepository facultyRepository;
     private final StudentRepository studentRepository;
@@ -26,24 +28,30 @@ public class StudentService {
 
     //CREATE
     public Student addStudent(Student student) {
+        return studentRepository.save(student);
+    // код ниже предназначен для сохранения студентов под нужными id для тестов
+    // нужно раскоментировать код сверху
 
-        studentRepository.save(student);
-        Student createfulStudent = studentRepository.findStudentByNameAndAge(student.getName(), student.getAge());
 
-        if (createfulStudent == null) {
-            throw new RuntimeException("ошибка при поиске");
-        }
-        System.out.println("first point");
+//            studentRepository.save(student);
+//            Student createfulStudent = studentRepository.findStudentByNameAndAge(student.getName(), student.getAge());
+//
+//
+//            if (createfulStudent == null) {
+//                throw new RuntimeException("ошибка при поиске");
+//            }
+//            System.out.println("first point");
+//
+//            String needId = student.getId().toString();
+//            String nowId = createfulStudent.getId().toString();
+//
+//            if (needId == null || nowId == null || needId == nowId) {
+//                throw new RuntimeException("ошибка при поиске индексов");
+//            }
+//            System.out.println("second point");
+//            studentRepository.changeIdByLostId(needId, nowId);
+//            return student;
 
-        String needId = student.getId().toString();
-        String nowId = createfulStudent.getId().toString();
-
-        if (needId == null || nowId == null || needId == nowId) {
-            throw new RuntimeException("ошибка при поиске индексов");
-        }
-        System.out.println("second point");
-        studentRepository.changeIdByLostId(needId, nowId);
-        return student;
     }
 
     //READ
@@ -73,8 +81,9 @@ public class StudentService {
     }
 
     public Faculty getFacultyByStudentId(Long id) {
-        Student student = studentRepository.findStudentById(id);
+        Student student = studentRepository.findFirstById(id);
         return student.getFaculty();
+
     }
     //возможно пригодится и нужно потом будет переделать, не удалять!
 //    public Collection<Student> filterByAge(int age) {

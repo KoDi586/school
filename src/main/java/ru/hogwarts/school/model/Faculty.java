@@ -1,5 +1,6 @@
 package ru.hogwarts.school.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.w3c.dom.stylesheets.LinkStyle;
 
@@ -17,6 +18,7 @@ public class Faculty {
     private String color;
 
     @OneToMany(mappedBy = "faculty")
+    @JsonIgnore
     private Set<Student> students;
 
     public Faculty(Long id, String name, String color) {
@@ -53,6 +55,7 @@ public class Faculty {
     }
 
     public Set<Student> getStudents() {
+
         return students;
     }
 

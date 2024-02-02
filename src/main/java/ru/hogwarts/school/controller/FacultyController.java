@@ -21,7 +21,7 @@ public class FacultyController {
     }
 
     @GetMapping("{id}")
-    public Faculty GetFaculty(@PathVariable Long id) {
+    public Faculty getFaculty(@PathVariable Long id) {
         return service.findFaculty(id);
     }
 
@@ -37,7 +37,7 @@ public class FacultyController {
     }
 
     @PostMapping
-    public Faculty PostFaculty(@RequestBody Faculty faculty) {
+    public Faculty postFaculty(@RequestBody Faculty faculty) {
         return service.addFaculty(faculty);
     }
 

@@ -11,30 +11,30 @@ import ru.hogwarts.school.controller.StudentController;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class SchoolApplicationTests {
 
-	@LocalServerPort
-	private int port;
+    @LocalServerPort
+    private int port;
 //после запуска приложения будет добавлен созданный порт
 
-	@Autowired
-	private StudentController studentController;
+    @Autowired
+    private StudentController studentController;
 // его будем проверять в первом тесте
 
-	@Autowired
-	private TestRestTemplate restTemplate;
+    @Autowired
+    private TestRestTemplate restTemplate;
 // класс, который поможет осуществлять проверки
 
-	@Test
-	void contextLoads() throws Exception{
-		Assertions.assertThat(studentController).isNotNull();
-	}
+    @Test
+    void contextLoads() throws Exception {
+        Assertions.assertThat(studentController).isNotNull();
+    }
 
-	@Test
-	public void testDefaultMassage() {
-		Assertions.assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/check", String.class)).isEqualTo("hello");
-	}
+    @Test
+    public void testDefaultMassage() {
+        Assertions.assertThat(this.restTemplate.getForObject
+                        (
+                                "http://localhost:" + port + "/check", String.class
+                        ))
+                .isEqualTo("hello");
+    }
 
-//здесь будет тест с моком
-	{
-
-	}
 }

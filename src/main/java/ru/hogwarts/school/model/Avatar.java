@@ -1,5 +1,6 @@
 package ru.hogwarts.school.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,7 @@ public class Avatar {
     @Lob
     private byte[] data;
     @OneToOne(mappedBy = "avatar")
+    @JsonIgnore
     private Student student;
 
     public Long getId() {

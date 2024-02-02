@@ -1,5 +1,6 @@
 package ru.hogwarts.school.service;
 
+import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class FacultyService {
 //    private Map<Long, Faculty> facultyMap = new HashMap<>();
 //    private Long incrementId = 0L;
@@ -66,7 +68,9 @@ public class FacultyService {
     }
 
     public Collection<Student> getStudentsByFacultyId(Long id) {
-        Faculty faculty = facultyRepository.findFacultyById(id);
+        int count = facultyRepository.findFirstById(id).getStudents().size();
+        Faculty faculty = facultyRepository.findFirstById(id);
+//        Faculty faculty1 = facultyRepository.fi
         return faculty.getStudents();
     }
 

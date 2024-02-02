@@ -20,7 +20,6 @@ public class Student {
     @OneToOne
     @JoinColumn(name = "avatar_id")
     @JsonIgnore//так как вывод медиа файла в json не предусмотренна
-//    @JsonIgnore//обезательно иначе вложенность в друг друга будет
     private Avatar avatar;
 
     public Student(Long id, String name, int age) {

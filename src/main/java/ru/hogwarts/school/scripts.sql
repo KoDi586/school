@@ -30,3 +30,7 @@ update students
 set age = 100
 where students.name = 'aleks' and students.age = 83;
 
+select faculties
+from faculties
+where faculties.id = 2;
+

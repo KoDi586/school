@@ -20,14 +20,8 @@ public class StudentController {
         this.service = service;
     }
 
-    //метод для теста работы с репозиторием потом удалить
-//    @PostMapping(path = "/create")
-//    public Student createStudent(Student student) {
-//        return service.createStudent(student);
-//    }
-
     @PostMapping
-    public Student PostStudent(@RequestBody Student student) {
+    public Student postStudent(@RequestBody Student student) {
         return service.addStudent(student);
     }
 
@@ -65,7 +59,7 @@ public class StudentController {
     }
 
 
-//    @GetMapping(path = "/filterByAge/{age}")
+    //    @GetMapping(path = "/filterByAge/{age}")
 //    public Collection<Student> filterByAge(@PathVariable int age) {
 //        return service.filterByAge(age);
 //    }
