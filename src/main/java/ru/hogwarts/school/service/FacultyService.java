@@ -32,7 +32,7 @@ public class FacultyService {
 
     //READ
     public Faculty findFaculty(Long id) {
-        return facultyRepository.findById(id).get();
+        return facultyRepository.findFirstById(id);
 //        if (facultyMap.containsKey(id)) {
 //            return facultyMap.get(id);
 //        } else {
@@ -48,7 +48,7 @@ public class FacultyService {
 
     //DELETE
     public Faculty removeFaculty(Long id) {
-        Faculty faculty = facultyRepository.findById(id).get();
+        Faculty faculty = facultyRepository.findFirstById(id);
         facultyRepository.delete(faculty);
         return faculty;
     }

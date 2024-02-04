@@ -59,6 +59,14 @@ public class Faculty {
         return students;
     }
 
+    public void setStudents(Set<Student> students) {  // for tests
+        this.students = students;
+    }
+
+//    public void addStudents(Student student) {  // for tests
+//        students.add(student);
+//    }
+
     @Override
     public String toString() {
         return "Faculty{" +

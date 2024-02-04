@@ -1,4 +1,4 @@
-package ru.hogwarts.school;
+package ru.hogwarts.school.MvcTests;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -185,7 +185,6 @@ public class StudContrWebMvcTest {
 
 
         when(studentRepository.findFirstById(any(Long.class))).thenReturn(student);
-//        doNothing().when(studentRepository.delete(any(Student.class))).voidMethod();
 
         doNothing().when(studentRepository).delete(any(Student.class));
 
