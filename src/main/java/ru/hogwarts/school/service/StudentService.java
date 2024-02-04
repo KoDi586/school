@@ -29,34 +29,11 @@ public class StudentService {
     //CREATE
     public Student addStudent(Student student) {
         return studentRepository.save(student);
-    // код ниже предназначен для сохранения студентов под нужными id для тестов
-    // нужно раскоментировать код сверху
-
-
-//            studentRepository.save(student);
-//            Student createfulStudent = studentRepository.findStudentByNameAndAge(student.getName(), student.getAge());
-//
-//
-//            if (createfulStudent == null) {
-//                throw new RuntimeException("ошибка при поиске");
-//            }
-//            System.out.println("first point");
-//
-//            String needId = student.getId().toString();
-//            String nowId = createfulStudent.getId().toString();
-//
-//            if (needId == null || nowId == null || needId == nowId) {
-//                throw new RuntimeException("ошибка при поиске индексов");
-//            }
-//            System.out.println("second point");
-//            studentRepository.changeIdByLostId(needId, nowId);
-//            return student;
-
     }
 
     //READ
     public Student findStudent(Long id) {
-        return studentRepository.findById(id).get();
+        return studentRepository.findFirstById(id);
     }
 
     //UPDATE
@@ -66,7 +43,7 @@ public class StudentService {
 
     //DELETE
     public Student removeStudent(Long id) {
-        Student student = studentRepository.findById(id).get();
+        Student student = studentRepository.findFirstById(id);
         studentRepository.delete(student);
         return student;
     }

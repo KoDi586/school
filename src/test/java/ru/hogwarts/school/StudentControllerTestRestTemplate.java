@@ -24,6 +24,12 @@ public class StudentControllerTestRestTemplate {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+//    private String urlRequest;
+//
+//    public void initialUrl() {
+//        urlRequest = String.format("http://localhost:%d/student", port);
+//    }
     // класс, который поможет осуществлять проверки
 
     @Test
