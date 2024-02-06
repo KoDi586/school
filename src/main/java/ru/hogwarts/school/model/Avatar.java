@@ -17,6 +17,7 @@ public class Avatar {
     private long fileSize;
     private String mediaType;
     @Lob
+    @JsonIgnore
     private byte[] data;
     @OneToOne(mappedBy = "avatar")
     @JsonIgnore

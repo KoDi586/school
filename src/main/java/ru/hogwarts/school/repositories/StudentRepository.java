@@ -18,6 +18,20 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Student findStudentByNameAndAge(String name, int age);
 
     @Modifying
-    @Query("UPDATE Student s SET s.id = :needId WHERE s.id = :nowId")
+    @Query(value = "UPDATE Student s SET s.id = :needId WHERE s.id = :nowId", nativeQuery = true)
     void changeIdByLostId(String needId, String nowId);
+
+    @Query(value = "select count(*)" +
+            " from students ", nativeQuery = true)
+    int getCountAllStudents();
+
+    @Query(value = "select avg(age) " +
+            "from students", nativeQuery = true)
+    float getAverageAge();
+
+    @Query(value = "select *\n" +
+            "from students\n" +
+            "ORDER BY id asc\n" +
+            "offset :minusFive", nativeQuery = true)
+    List<Student> getLastFiveStudents(int minusFive);
 }

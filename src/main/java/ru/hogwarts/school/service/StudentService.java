@@ -62,6 +62,19 @@ public class StudentService {
         return student.getFaculty();
 
     }
+
+    public int getCountAllStudents() {
+        return studentRepository.getCountAllStudents();
+    }
+
+    public float getAverageAge() {
+        return studentRepository.getAverageAge();
+    }
+
+    public Collection<Student> getLastFiveStudents() {
+        int count = studentRepository.getCountAllStudents();
+        return studentRepository.getLastFiveStudents(count - 5);
+    }
     //возможно пригодится и нужно потом будет переделать, не удалять!
 //    public Collection<Student> filterByAge(int age) {
 //        return studentMap.values().stream()

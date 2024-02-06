@@ -2,6 +2,7 @@ package ru.hogwarts.school.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import ru.hogwarts.school.repositories.AvatarRepository;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
@@ -89,5 +91,11 @@ public class AvatarService {
 
     public Avatar findAvatar(Long id) {
         return avatarRepository.findAvatarById(id);
+    }
+
+    public List<Avatar> findPagingAvatars(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page-1, size);
+        return avatarRepository.findAll(pageRequest).getContent();
+
     }
 }

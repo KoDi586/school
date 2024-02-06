@@ -34,3 +34,41 @@ select faculties
 from faculties
 where faculties.id = 2;
 
+
+
+
+// тестовая часть
+select * from tabl where date <= '2021.03.01' and date >= '2021.01.01';
+
+// для количества
+select count(*)
+from tabl
+where date <= '2021.03.01' and date >= '2021.01.01';
+
+// тотал это название для полученного значения, avg это среднее
+select sum(amount) as total, max(amount) as maximum, avg(amount)
+from tabl where date <= '2021.03.01' and date >= '2021.01.01';
+
+// для того чтобы разделить по группам и взять сумму
+select category, sum(amount) as amount from tabl group by categoty
+
+
+select category, sum(amount) as amount
+from tabl
+group by categoty
+having sum(amount) > 1000;
+
+// ограниченный вывод
+select * from tabl limit 4
+// пропустить первые 4
+select * from tabl offset 4
+
+select count(*)
+from students
+
+select *
+from students
+ORDER BY id asc
+offset 4
+
+select * from avatars

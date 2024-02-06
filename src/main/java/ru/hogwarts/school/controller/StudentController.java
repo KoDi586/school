@@ -59,6 +59,20 @@ public class StudentController {
     }
 
 
+    @GetMapping("/countAllStudents")
+    public int getCountAllStudents() {
+        return service.getCountAllStudents();
+    }
+
+    @GetMapping("/getAverageStudentAge")
+    public float getAverageAge() {
+        return service.getAverageAge();
+    }
+
+    @GetMapping("getLastFiveStudents")
+    public Collection<Student> getLastFiveStudents() {
+        return service.getLastFiveStudents();
+    }
     //    @GetMapping(path = "/filterByAge/{age}")
 //    public Collection<Student> filterByAge(@PathVariable int age) {
 //        return service.filterByAge(age);
