@@ -72,3 +72,4 @@ ORDER BY id asc
 offset 4
 
 select * from avatars
+
