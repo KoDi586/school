@@ -2,6 +2,8 @@ package ru.hogwarts.school.service;
 
 import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
@@ -14,9 +16,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class FacultyService {
-//    private Map<Long, Faculty> facultyMap = new HashMap<>();
-//    private Long incrementId = 0L;
     private final FacultyRepository facultyRepository;
+    Logger logger = LoggerFactory.getLogger(FacultyService.class);
 
     @Autowired
     public FacultyService(FacultyRepository facultyRepository) {
@@ -25,30 +26,29 @@ public class FacultyService {
 
     //CREATE
     public Faculty addFaculty(Faculty faculty) {
+        logger.info("create faculty: {}", faculty);
         return facultyRepository.save(faculty);
-//        faculty.setId(++incrementId);
-//        return facultyMap.put(incrementId, faculty);
     }
 
     //READ
     public Faculty findFaculty(Long id) {
-        return facultyRepository.findFirstById(id);
-//        if (facultyMap.containsKey(id)) {
-//            return facultyMap.get(id);
-//        } else {
-//            throw new RuntimeException("this is bad id!");
-//        }
+        Faculty faculty = facultyRepository.findFirstById(id);
+        if (faculty == null) {
+            logger.warn("foundful faculty is null");
+        }
+        return faculty;
     }
 
     //UPDATE
     public Faculty setFaculty(Faculty faculty) {
+        logger.info("new faculty is: {}", faculty);
         return facultyRepository.save(faculty);
-//        return facultyMap.put(faculty.getId(), faculty);
     }
 
     //DELETE
     public Faculty removeFaculty(Long id) {
         Faculty faculty = facultyRepository.findFirstById(id);
+        logger.warn("{}. this faculty will be remove", faculty);
         facultyRepository.delete(faculty);
         return faculty;
     }
@@ -56,27 +56,25 @@ public class FacultyService {
     //метод для поиска по цвету либо по имени
     public Collection<Faculty> findByNameOrColor(String name, String color) {
         if (name != null & StringUtils.isNotBlank(name)) {
+            logger.debug("was found by NAME with ignore case");
             return facultyRepository.findFacultiesByNameIgnoreCase(name);
         } else if (color != null & StringUtils.isNotBlank(color)) {
+            logger.debug("was found by COLOR with ignore case");
             return facultyRepository.findFacultiesByColorIgnoreCase(color);
         }
         return new ArrayList<>();
     }
 
     public Collection<Faculty> getAll() {
-        return facultyRepository.findAll();
+        List<Faculty> facultyRepositoryAll = facultyRepository.findAll();
+        logger.info("count anything faculties - {}", facultyRepositoryAll.size());
+        return facultyRepositoryAll;
     }
 
     public Collection<Student> getStudentsByFacultyId(Long id) {
-        int count = facultyRepository.findFirstById(id).getStudents().size();
         Faculty faculty = facultyRepository.findFirstById(id);
-//        Faculty faculty1 = facultyRepository.fi
-        return faculty.getStudents();
+        Set<Student> students = faculty.getStudents();
+        logger.debug("found count students: {}", students.size());
+        return students;
     }
-
-//    public Collection<Faculty> filterByColor(String color) {
-//        return facultyMap.values().stream()
-//                .filter(student -> Objects.equals(student.getColor(), color))
-//                .collect(Collectors.toList());
-//    }
 }
