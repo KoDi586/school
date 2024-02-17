@@ -1,10 +1,11 @@
 package ru.hogwarts.school.service;
 
 import jakarta.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.exceptions.NotSaveAvatarEx;
@@ -16,18 +17,19 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
-
-//import static io.swagger.v3.core.util.AnnotationsUtils.getExtensions;
 
 @Service
 @Transactional
 public class AvatarService {
     private final AvatarRepository avatarRepository;
     private final StudentService studentService;
-    String avatarsDir = "C:\\Users\\hirof\\IdeaProjects\\school\\src\\main\\java\\ru\\hogwarts\\school\\avatars";
+    @Value("${avatar.image.directory}")
+    private String avatarsDir;
+    // = "C:\\Users\\hirof\\IdeaProjects\\school\\src\\main\\java\\ru\\hogwarts\\school\\avatars";
+
+    Logger logger = LoggerFactory.getLogger(AvatarService.class);
 
     @Autowired
     public AvatarService(AvatarRepository repository, StudentService service) {
@@ -37,6 +39,8 @@ public class AvatarService {
 
     //добавление аватара студенту
     public void uploadAvatar(Long studentId, MultipartFile avatar) throws IOException {
+        logger.debug("file directory is: {}", avatarsDir);
+
         Student student = studentService.findStudent(studentId); //поиск нужного студента
 
         Path filePath = null;
@@ -76,26 +80,28 @@ public class AvatarService {
         student.setAvatar(newAvatar);
         //добавить студенту его аву
         avatarRepository.save(newAvatar);
-//        Avatar createfulAvatar = avatarRepository.findAvatarByFilePath(newAvatar.getFilePath());
-//
-//
-//        avatarRepository.changeIdByLostId(studentId.toString(), createfulAvatar.getId().toString());
 
-
-        //хочу потом сделать чтобы нормальные id были у авы студентов
     }
 
     private String getExtensions(String fileName) {
-        return fileName.substring(fileName.lastIndexOf(".") + 1);
+        String extentions = fileName.substring(fileName.lastIndexOf(".") + 1);
+        logger.debug("extentions is: {}", extentions);
+        return extentions;
     }
 
     public Avatar findAvatar(Long id) {
-        return avatarRepository.findAvatarById(id);
+        Avatar avatarById = avatarRepository.findAvatarById(id);
+        if (avatarById != null) {
+            logger.info("avatar is found");
+        }
+        return avatarById;
     }
 
     public List<Avatar> findPagingAvatars(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page-1, size);
-        return avatarRepository.findAll(pageRequest).getContent();
+        List<Avatar> avatars = avatarRepository.findAll(pageRequest).getContent();
+        logger.info("found count avatars: {}", avatars.size());
+        return avatars;
 
     }
 }
