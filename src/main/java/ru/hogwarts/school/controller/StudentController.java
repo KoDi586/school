@@ -73,6 +73,12 @@ public class StudentController {
     public Collection<Student> getLastFiveStudents() {
         return service.getLastFiveStudents();
     }
+
+    @GetMapping("names/beginA")
+    public ResponseEntity<Collection<String>> getStudentNameBeginA() {
+        return ResponseEntity.ok(service.getStudentNameBeginA());
+    }
+
     //    @GetMapping(path = "/filterByAge/{age}")
 //    public Collection<Student> filterByAge(@PathVariable int age) {
 //        return service.filterByAge(age);

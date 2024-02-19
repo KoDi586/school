@@ -13,6 +13,7 @@ import ru.hogwarts.school.repositories.StudentRepository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -100,6 +101,18 @@ public class StudentService {
         List<Student> lastFiveStudents = studentRepository.getLastFiveStudents(count - 5);
         logger.debug("last five students is: {}", lastFiveStudents.toString());
         return lastFiveStudents;
+    }
+
+    public Collection<String> getStudentNameBeginA() {
+        List<Student> list = studentRepository.findAll();
+        return list.stream()
+
+                .filter(s -> s.getName().charAt(0) == 'a' ||
+                        s.getName().charAt(0) == 'A')
+
+                .map(s -> s.getName().toUpperCase())
+                .sorted()
+                .toList();
     }
 
     //возможно пригодится и нужно потом будет переделать, не удалять!
