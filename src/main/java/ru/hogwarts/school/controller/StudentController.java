@@ -79,6 +79,13 @@ public class StudentController {
         return ResponseEntity.ok(service.getStudentNameBeginA());
     }
 
+    @GetMapping("average/age")
+    public ResponseEntity<Double> getAverageAgeByStream() {
+        return ResponseEntity.ok(service.getAverageAgeByStream());
+    }
+
+
+
     //    @GetMapping(path = "/filterByAge/{age}")
 //    public Collection<Student> filterByAge(@PathVariable int age) {
 //        return service.filterByAge(age);

@@ -115,6 +115,15 @@ public class StudentService {
                 .toList();
     }
 
+    public Double getAverageAgeByStream() {
+        List<Student> list = studentRepository.findAll();
+        return list.stream()
+                .map(Student::getAge)
+                .mapToDouble(num -> num) // преобразуем int в double
+                .average().getAsDouble();// находим среднее значение
+
+    }
+
     //возможно пригодится и нужно потом будет переделать, не удалять!
 //    public Collection<Student> filterByAge(int age) {
 //        return studentMap.values().stream()

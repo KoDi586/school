@@ -77,4 +77,25 @@ public class FacultyService {
         logger.debug("found count students: {}", students.size());
         return students;
     }
+
+    public String getLongName() {
+        List<Faculty> faculties = facultyRepository.findAll();
+        int MAX;
+        MAX = faculties.stream()
+                .map(faculty -> faculty.getName().length())
+                .max(Comparator.naturalOrder())
+                .orElse(-1);
+
+        if (MAX == -1) {
+            logger.debug("факультеты не найдены");
+            throw new RuntimeException("факультетов скорее всего нет!");
+        }
+        logger.debug("хотябы один факультет существует");
+
+        return faculties.stream()
+                .map(Faculty::getName)
+                .filter(name -> name.length() == MAX)
+                .findFirst().orElse("ошибка");
+
+    }
 }
