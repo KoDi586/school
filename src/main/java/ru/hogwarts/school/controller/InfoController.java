@@ -25,4 +25,9 @@ public class InfoController {
         return new ResponseEntity<>(port, HttpStatus.OK);
     }
 
+    @GetMapping("sum/1MillionNumbers")
+    public ResponseEntity<Long> sumMillionNumbers() {
+        return ResponseEntity.ok(service.sumMillionNumbers());
+    }
+
 }
