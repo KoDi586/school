@@ -125,8 +125,9 @@ public class StudentService {
     }
 
 
-    Integer number = 0;
+    Integer number;
     public void printAllStudentsParallel() {
+        number = 0;
         List<String> names = studentRepository.findAll()
                 .stream()
                 .map(Student::getName)
@@ -160,7 +161,43 @@ public class StudentService {
         thread1.start();
         thread2.start();
 
-        number = 0;
 
+    }
+
+    public void printAllStudentsSynchronized() {
+        number = 0;
+        List<String> names = studentRepository.findAll()
+                .stream()
+                .map(Student::getName)
+                .toList();
+
+
+        names.forEach(System.out::println);
+
+
+        printSentence(names.get(0));
+        printSentence(names.get(1));
+
+        Thread thread1 = new Thread(() -> {
+
+            printSentence(names.get(2));
+            printSentence(names.get(3));
+
+        });
+
+
+        Thread thread2 = new Thread(() -> {
+
+            printSentence(names.get(4));
+            printSentence(names.get(5));
+
+        });
+
+        thread1.start();
+        thread2.start();
+
+    }
+    private synchronized void printSentence(String name) {
+        System.out.println(number++ + ": " + name);
     }
 }
