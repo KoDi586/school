@@ -29,7 +29,7 @@ public class AvatarService {
     private String avatarsDir;
     // = "C:\\Users\\hirof\\IdeaProjects\\school\\src\\main\\java\\ru\\hogwarts\\school\\avatars";
 
-    Logger logger = LoggerFactory.getLogger(AvatarService.class);
+    private final Logger logger = LoggerFactory.getLogger(AvatarService.class);
 
     @Autowired
     public AvatarService(AvatarRepository repository, StudentService service) {
