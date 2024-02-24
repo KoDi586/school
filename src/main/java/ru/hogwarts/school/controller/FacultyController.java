@@ -61,9 +61,5 @@ public class FacultyController {
     public ResponseEntity<String> getLongName() {
         return ResponseEntity.ok(service.getLongName());
     }
-    // не удалять потом пригодится
-//    @GetMapping(path = "/filterByColor/{color}")
-//    public Collection<Faculty> filterByColor(@PathVariable String color) {
-//        return service.filterByColor(color);
-//    }
+
 }

@@ -84,10 +84,10 @@ public class StudentController {
         return ResponseEntity.ok(service.getAverageAgeByStream());
     }
 
+    @GetMapping("students/print-parallel")
+    public ResponseEntity<?> printParallel() {
+        service.printAllStudentsParallel();
+        return ResponseEntity.ok("Check out console!");
+    }
 
-
-    //    @GetMapping(path = "/filterByAge/{age}")
-//    public Collection<Student> filterByAge(@PathVariable int age) {
-//        return service.filterByAge(age);
-//    }
 }

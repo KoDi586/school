@@ -124,10 +124,43 @@ public class StudentService {
 
     }
 
-    //возможно пригодится и нужно потом будет переделать, не удалять!
-//    public Collection<Student> filterByAge(int age) {
-//        return studentMap.values().stream()
-//                .filter(student -> student.getAge() == age)
-//                .collect(Collectors.toList());
-//    }
+
+    Integer number = 0;
+    public void printAllStudentsParallel() {
+        List<String> names = studentRepository.findAll()
+                .stream()
+                .map(Student::getName)
+                .toList();
+
+
+        names.forEach(System.out::println);
+
+
+        System.out.println("Iteration number: " + number++ + " - " + names.get(0));
+
+        System.out.println("Iteration number: " + number++ + " - " + names.get(1));
+
+        Thread thread1 = new Thread(() -> {
+
+            System.out.println("Iteration number: " + number++ + " - " + names.get(2));
+
+            System.out.println("Iteration number: " + number++ + " - " + names.get(3));
+
+        });
+
+
+        Thread thread2 = new Thread(() -> {
+
+            System.out.println("Iteration number: " + number++ + " - " + names.get(4));
+
+            System.out.println("Iteration number: " + number++ + " - " + names.get(5));
+
+        });
+
+        thread1.start();
+        thread2.start();
+
+        number = 0;
+
+    }
 }
